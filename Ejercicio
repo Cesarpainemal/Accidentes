@@ -1,0 +1,69 @@
+public static int [][] llenarDatos(int H [][], int cantidad){
+        for (int i =0;i< cantidad ;i++){
+            for (int j =0;j< 2;j++){
+                if (j==0){
+                    H[i][j]=(i+1);
+                }
+                else{
+                    H[i][j]=respuesta(i);
+                }
+            }
+        }return H;
+    }
+    public static int respuesta(int i){
+        Scanner entrada= new Scanner (System.in);
+        
+        System.out.println("De que gravedad es el herido? \n[1]leve\n[2]medio\n[3]grave ");
+        int resp=entrada.nextInt();
+        resp=validacion(resp);
+    
+        return resp;
+    }
+    public static int validacion (int n){
+        
+        Scanner entrada= new Scanner (System.in);
+        while (n<1 || n>3){
+            System.out.println("valor incorrecto, ingrese nuevamente");
+            n=entrada.nextInt();
+        }
+        return n;
+    } 
+   public static void main(String[] args) {
+        int cantHeridos[][];
+        int datos[]= new int [3];
+        
+        Scanner entrada= new Scanner (System.in);
+        
+        System.out.println("Ingrese la cantidad de heridos");
+        int cantidad = entrada.nextInt();
+    
+        cantHeridos= new int [cantidad][2];
+        cantHeridos= llenarDatos(cantHeridos,cantidad);
+        datos=total(cantHeridos,datos,cantidad);
+        imprimir(cantidad,cantHeridos);
+        
+        System.out.println("Leves "+datos[0]);
+        System.out.println("Medio "+datos[1]);
+        System.out.println("Grave "+datos[2]);
+    }
+    public static void imprimir (int cantidad, int H[][]){
+        
+        for (int i =0;i<cantidad;i++){
+            for (int j=0 ;j<2;j++){
+                System.out.print(H[i][j]+" ");
+            }System.out.println();
+        }
+    }
+    public static int [] total(int H[][], int lista [], int cantidad){
+        int j =1;
+        for(int i =0;i<cantidad;i++){
+            if (H[i][j]==1){
+                lista[0]++;
+            }else if (H[i][j]==2){
+                lista[1]++;
+            }else 
+                lista[2]++;
+        }
+        return lista;
+    }
+}    
